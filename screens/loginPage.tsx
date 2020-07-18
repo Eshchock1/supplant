@@ -60,7 +60,7 @@ const LoginPage = ({ navigation }) => {
           <Text style={styles.logo}><Text style={{ color: "#6E6D74" }}>sup</Text>plant</Text>
 
             <Text style={styles.subtitle}>Track Your Carbon Footprint</Text>
-        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.title}>Login</Text>
         <Form style={styles.signIn}>
           <Item floatingLabel style={{ borderColor: "#207A18", paddingBottom:10, }}>
             <Label>Email</Label>
@@ -93,16 +93,14 @@ const LoginPage = ({ navigation }) => {
           <Text style={styles.bottomText}>Don't have an account yet?</Text>
           <TouchableOpacity onPress={() => navigation.navigate("CreateAccountPage")}>
             
-            <Text style={{ color: "#207A18" }}> Create an account</Text>
+            <Text style={{ color: "#207A18" }}> Sign Up.</Text>
           </TouchableOpacity>
         </View>
         <View style={{flexDirection: "row", justifyContent: "center", width:"100%",}}>
         <Image 
-        style={{width:360, height:360, marginTop:10}}
-        source={require('../assets/good.png')}
-      />
+        style={{width:360, height:360, marginTop:15}}
+        source={require('../assets/good.png')}/>
         </View>
-        
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
@@ -113,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingHorizontal: 30,
-    paddingVertical: 20,
+    paddingVertical: 15,
     // alignItems: 'center',
     // justifyContent: 'center',
   },
@@ -137,9 +135,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#6E6D74",
-    fontSize: 38,
+    fontSize: 30,
     fontWeight: "bold",
-    paddingTop: 20,
+    paddingTop: 10,
   },
   signIn: {
     paddingBottom: 15,

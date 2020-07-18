@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component  } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView, Image} from 'react-native';
 import firebase from "../firebase";
 import {Form, Item, Label, Input, Button} from 'native-base';
 import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,14 +56,14 @@ return (
 keyboardVerticalOffset={
 Platform.select({
    ios: () => 0,
-   android: () => -80
+   android: () => -150
 })()
 }    style={styles.container}>
-    <Text style={styles.logo}><Text style={{color:'black',}}>Snap</Text> Smile</Text>
-    <Text>Dental Checkups with your mobile device</Text>
-    <Text style={styles.title}>Create an Account</Text>
+    <Text style={styles.logo}><Text style={{ color: "#6E6D74" }}>sup</Text>plant</Text>
+            <Text style={styles.subtitle}>Track Your Carbon Footprint</Text>
+    <Text style={styles.title}>Sign Up</Text>
     <Form style={styles.signIn}>
-    <Item floatingLabel style={{borderColor:"#3975ff"}}>
+    <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
         <Label>Full Name</Label>
         <Input 
           autoCorrect={false}
@@ -71,7 +71,7 @@ Platform.select({
           onChangeText= {(name) => setName(name)}
         />
       </Item>
-      <Item floatingLabel style={{borderColor:"#3975ff"}}>
+      <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
         <Label>Email</Label>
         <Input 
           autoCorrect={false}
@@ -79,7 +79,7 @@ Platform.select({
           onChangeText= {(email) => setEmail(email)}
         />
       </Item>
-      <Item floatingLabel style={{borderColor:"#3975ff"}}>
+      <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
         <Label>Password</Label>
         <Input 
           autoCorrect={false}
@@ -88,7 +88,7 @@ Platform.select({
           onChangeText= {(password) => setPassword(password)}
         />
       </Item>
-      <Item floatingLabel style={{borderColor:"#3975ff"}}>
+      <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
         <Label>Confirm Password</Label>
         <Input 
           autoCorrect={false}
@@ -99,11 +99,16 @@ Platform.select({
       </Item>
     </Form>
     <Text style={styles.errorText}>{errorText}</Text>
-    <Button style={{backgroundColor:'#3975ff'}} full rounded onPress={()=> signUpUser(email, password)}><Text style={{color:'white'}}>Create Account</Text></Button>
+      <Button style={{backgroundColor:'#207A18', marginTop:0, borderRadius:12,}} full onPress={()=> signUpUser(email, password)}><Text style={{color:'white'}}>SIGN UP</Text></Button>
     <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'flex-end',}}>
     <Text style={styles.bottomText}>Already have an account? </Text>
-    <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}><Text style={{color:'#3975ff'}}>Sign in</Text></TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}><Text style={{color:'#207A18'}}>Login.</Text></TouchableOpacity>
     </View>
+    <View style={{flexDirection: "row", justifyContent: "center", width:"100%",}}>
+        <Image 
+        style={{width:330, height:330, marginTop:12}}
+        source={require('../assets/good.png')}/>
+        </View>
   </KeyboardAvoidingView>
   </TouchableWithoutFeedback>
 
@@ -115,29 +120,36 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal:30,
-    paddingVertical:40,
+    paddingVertical:15,
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   errorText: {
-    color:'red',
-    fontSize:15,
-    textAlign:'center',
-    paddingBottom:10,
+    color: "#ff6347",
+    fontSize: 15,
+    textAlign: "center",
+    paddingBottom: 10,
   },
   logo: {
-    color:'#3975ff',
-    fontSize:28,
-    paddingBottom:10,
+    color: "#32A023",
+    fontSize: 38,
+    fontWeight: "bold",
+    paddingTop: 20,
+    // fontFamily:"roboto",
   },
-  title:{
-    color:'black',
-    fontSize:38,
-    fontWeight:'bold',
-    paddingTop:20,
+  subtitle:{
+    paddingTop:10,
+    color:'#494949',
+    fontSize:15,
+  },
+  title: {
+    color: "#6E6D74",
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingTop: 10,
   },
   signIn:{
-    paddingBottom:30,
+    paddingBottom:15,
   },
   bottomText:{
     paddingTop:30,

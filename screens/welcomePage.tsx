@@ -28,16 +28,14 @@ axios.get("https://google.com", {headers : `Bearer: ${idToken}`}).then(function(
 );
       }
 
-
       
 render(){
   return (
       <View style={styles.container}>
-      <Text style={styles.logo}><Text style={{color:'black',}}>Snap</Text> Smile</Text>
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.name}>{this.state.name}</Text>
-      <Button style={{backgroundColor:'#3975ff', marginTop:30,}} full rounded onPress={()=> this.signOut()}><Text style={{color:'white'}}>Sign Out</Text></Button>
-      <Button style={{backgroundColor:'#3975ff', marginTop:30,}} full rounded onPress={()=> this.token()}><Text style={{color:'white'}}>Get Token</Text></Button>
+      <Button style={{backgroundColor:'#32A023', marginTop:30,}} full rounded onPress={()=> this.signOut()}><Text style={{color:'white'}}>Sign Out</Text></Button>
+      <Button style={{backgroundColor:'#32A023', marginTop:30,}} full rounded onPress={()=> this.token()}><Text style={{color:'white'}}>Get Token</Text></Button>
       </View>
   );}
 }
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
     paddingVertical:40,
   },
   name:{
-    color:'#3975ff',
+    color:'#32A023',
     fontSize:28,
     paddingVertical:10, 
   },
