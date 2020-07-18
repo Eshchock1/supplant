@@ -17,7 +17,7 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 
-const LoginPage = ({ navigation }) => {
+const LoginPage = ({ navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrortext] = useState("");
