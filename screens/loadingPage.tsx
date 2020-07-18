@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component  } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView, Dimensions} from 'react-native';
 import firebase from "../firebase";
 import {Form, Item, Label, Input, Button} from 'native-base';
 import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
@@ -22,7 +22,7 @@ useEffect(() => {
 
 return (
     <View style={styles.container}>
-        <SkypeIndicator color='#3c77ff' size={100}/>
+        <SkypeIndicator color='#4ba023' size={(Dimensions.get("window").width + Dimensions.get("window").height) / 10.8}/>
     </View>
 )
 }
@@ -31,8 +31,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal:30,
-    paddingVertical:40,
     alignItems: 'center',
     justifyContent: 'center',
   }

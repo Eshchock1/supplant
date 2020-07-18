@@ -34,8 +34,8 @@ render(){
       <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.name}>{this.state.name}</Text>
-      <Button style={{backgroundColor:'#32A023', marginTop:30,}} full rounded onPress={()=> this.signOut()}><Text style={{color:'white'}}>Sign Out</Text></Button>
-      <Button style={{backgroundColor:'#32A023', marginTop:30,}} full rounded onPress={()=> this.token()}><Text style={{color:'white'}}>Get Token</Text></Button>
+      <Button style={{backgroundColor:'#4ba023', marginTop:30,}} full rounded onPress={()=> this.signOut()}><Text style={{color:'white'}}>Sign Out</Text></Button>
+      <Button style={{backgroundColor:'#4ba023', marginTop:30,}} full rounded onPress={()=> this.token()}><Text style={{color:'white'}}>Get Token</Text></Button>
       </View>
   );}
 }
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     paddingVertical:40,
   },
   name:{
-    color:'#32A023',
+    color:'#4ba023',
     fontSize:28,
     paddingVertical:10, 
   },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     paddingBottom:10,
   },
   title:{
-    color:'black',
+    color:'#494949',
     fontSize:38,
     fontWeight:'bold',
     paddingTop:20,

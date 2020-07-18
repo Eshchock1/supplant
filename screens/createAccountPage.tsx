@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component  } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView, Image} from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView,TouchableWithoutFeedback, Keyboard, ScrollView, Image, Dimensions} from 'react-native';
 import firebase from "../firebase";
 import {Form, Item, Label, Input, Button} from 'native-base';
 import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,14 +56,14 @@ return (
 keyboardVerticalOffset={
 Platform.select({
    ios: () => 0,
-   android: () => -150
+   android: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/150)
 })()
 }    style={styles.container}>
     <Text style={styles.logo}><Text style={{ color: "#6E6D74" }}>sup</Text>plant</Text>
             <Text style={styles.subtitle}>Track Your Carbon Footprint</Text>
     <Text style={styles.title}>Sign Up</Text>
     <Form style={styles.signIn}>
-    <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
+    <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/4),}}>
         <Label>Full Name</Label>
         <Input 
           autoCorrect={false}
@@ -71,7 +71,7 @@ Platform.select({
           onChangeText= {(name) => setName(name)}
         />
       </Item>
-      <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
+    <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/4),}}>
         <Label>Email</Label>
         <Input 
           autoCorrect={false}
@@ -79,7 +79,7 @@ Platform.select({
           onChangeText= {(email) => setEmail(email)}
         />
       </Item>
-      <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
+    <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/4),}}>
         <Label>Password</Label>
         <Input 
           autoCorrect={false}
@@ -88,7 +88,7 @@ Platform.select({
           onChangeText= {(password) => setPassword(password)}
         />
       </Item>
-      <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:10, marginTop:4,}}>
+    <Item floatingLabel style={{borderColor:"#207A18",paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/4),}}>
         <Label>Confirm Password</Label>
         <Input 
           autoCorrect={false}
@@ -99,15 +99,15 @@ Platform.select({
       </Item>
     </Form>
     <Text style={styles.errorText}>{errorText}</Text>
-      <Button style={{backgroundColor:'#207A18', marginTop:0, borderRadius:12,}} full onPress={()=> signUpUser(email, password)}><Text style={{color:'white'}}>SIGN UP</Text></Button>
+      <Button style={{backgroundColor:'#207A18', marginTop:0, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> signUpUser(email, password)}><Text style={{color:'white'}}>SIGN UP</Text></Button>
     <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'flex-end',}}>
     <Text style={styles.bottomText}>Already have an account? </Text>
     <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}><Text style={{color:'#207A18'}}>Login.</Text></TouchableOpacity>
     </View>
     <View style={{flexDirection: "row", justifyContent: "center", width:"100%",}}>
         <Image 
-        style={{width:330, height:330, marginTop:12}}
-        source={require('../assets/good.png')}/>
+        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/330), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/330), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12)}}
+        source={require('../assets/mainPlant.png')}/>
         </View>
   </KeyboardAvoidingView>
   </TouchableWithoutFeedback>
@@ -119,40 +119,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal:30,
-    paddingVertical:15,
+    paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30),
+    paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   errorText: {
     color: "#ff6347",
-    fontSize: 15,
+    fontSize: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
     textAlign: "center",
-    paddingBottom: 10,
+    paddingBottom: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),
   },
   logo: {
-    color: "#32A023",
-    fontSize: 38,
+    color: "#4ba023",
+    fontSize: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/38),
     fontWeight: "bold",
-    paddingTop: 20,
+    paddingTop: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),
     // fontFamily:"roboto",
   },
   subtitle:{
-    paddingTop:10,
+    paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),
     color:'#494949',
-    fontSize:15,
+    fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
   },
   title: {
-    color: "#6E6D74",
-    fontSize: 30,
-    fontWeight: "bold",
-    paddingTop: 10,
+    color: "#30851b",
+    fontSize: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30),
+    paddingTop: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),
   },
   signIn:{
-    paddingBottom:15,
+    paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
   },
   bottomText:{
-    paddingTop:30,
+    paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30),
     textAlign:'center',
   }
 });
