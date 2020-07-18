@@ -53,7 +53,7 @@ const LoginPage = ({ navigation }) => {
       <KeyboardAvoidingView // adjust the value here if you need more padding
         behavior="position"
         keyboardVerticalOffset={Platform.select({
-          ios: () => -200,
+          ios: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200),
           android: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/250),
         })()}
         style={styles.container}
