@@ -5,7 +5,7 @@ import {Form, Item, Label, Input, Button} from 'native-base';
 import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 
-export default class welcomePage extends Component {
+export default class WelcomePage extends Component {
 
     state = {
         name: firebase.auth().currentUser.displayName
@@ -37,6 +37,7 @@ render(){
       <Button style={{backgroundColor:'#4ba023', marginTop:30,}} full rounded onPress={()=> this.signOut()}><Text style={{color:'white'}}>Sign Out</Text></Button>
       <Button style={{backgroundColor:'#4ba023', marginTop:30,}} full rounded onPress={()=> this.token()}><Text style={{color:'white'}}>Get Token</Text></Button>
       </View>
+      
   );}
 }
 
