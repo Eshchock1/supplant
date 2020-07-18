@@ -55,7 +55,7 @@ return (
   behavior='position'
 keyboardVerticalOffset={
 Platform.select({
-   ios: () => 0,
+   ios: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),
    android: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/150)
 })()
 }    style={styles.container}>
