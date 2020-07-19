@@ -99,7 +99,7 @@ Platform.select({
       </Item>
     </Form>
     <Text style={styles.errorText}>{errorText}</Text>
-      <Button style={{backgroundColor:'#207A18', marginTop:0, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> signUpUser(email, password)}><Text style={{color:'white'}}>SIGN UP</Text></Button>
+      <Button style={{shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,backgroundColor:'#207A18', marginTop:0, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> signUpUser(email, password)}><Text style={{color:'white'}}>SIGN UP</Text></Button>
     <View style={{flexDirection: 'row', justifyContent:'center', alignItems:'flex-end',}}>
     <Text style={styles.bottomText}>Already have an account? </Text>
     <TouchableOpacity onPress={() => navigation.navigate('LoginPage')}><Text style={{color:'#207A18'}}>Login.</Text></TouchableOpacity>

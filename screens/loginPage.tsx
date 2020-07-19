@@ -83,7 +83,7 @@ const LoginPage = ({ navigation}) => {
         </Form>
         <Text style={styles.errorText}>{errorText}</Text>
           
-        <Button style={{backgroundColor:'#207A18', marginTop:0, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> loginUser(email, password)}><Text style={{color:'white'}}>LOGIN</Text></Button>
+        <Button style={{shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,backgroundColor:'#207A18', marginTop:0, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> loginUser(email, password)}><Text style={{color:'white'}}>LOGIN</Text></Button>
 
         <View
           style={{
@@ -93,8 +93,7 @@ const LoginPage = ({ navigation}) => {
           }}>
           <Text style={styles.bottomText}>Don't have an account yet?</Text>
           <TouchableOpacity onPress={() => navigation.navigate("CreateAccountPage")}>
-            
-            <Text style={{ color: "#207A18" }}> Sign Up.</Text>
+            <Text style={{ color: "#207A18" }}>Sign Up.</Text>
           </TouchableOpacity>
         </View>
         <View style={{flexDirection: "row", justifyContent: "center", width:"100%",}}>
