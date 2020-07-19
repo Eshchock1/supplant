@@ -12,36 +12,43 @@ import { Tooltip} from 'react-native-elements';
 
 export default class WelcomePage extends Component {
   
+    state= {
+      xp:10,
+      chart:[ 2.2, 3, 5.5, 2.3, 3.2, 7, 6.2],
+      total: 105.2,
+      scannedItems:[
+        {id:0,image:require('../assets/image.png'), rating:7, ingredients:['cheese', 'tomatoes', 'bread']},
+        {id:1,image:require('../assets/image2.png'), rating:5, ingredients:['beef', 'rice',]},
+        {id:2,image:require('../assets/image.png'), rating:9, ingredients:['lettuce', 'tomatoes', 'cucumber']},
+        {id:3,image:require('../assets/image2.png'), rating:2, ingredients:['cheese', 'beef', 'pepperoni']},
+      ],
+      days:[0,0], // I calc this
+      maxVal:10 // I calc this
+    }
+
+    componentDidMount(){
+      this.setState({maxVal:Math.round(this.state.chart.sort()[this.state.chart.length -1] + 2)})
+      this.setState({avg: Math.round(this.state.chart.reduce((a, b) => a + b, 0)/7 * 10)/10})
+      let today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var dd2 = String(today.getDate()-7).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      this.setState({days:[mm + '/' + dd2, mm + '/' + dd]})
+
+    }
+
+
       renderChart() {
-        const chart = [
-          1.1,
-          3,
-          1.5,
-          2.3,
-          3.2,
-          7,
-          8.2,
-          1.2,
-          2,
-          1.2,
-          8,
-          3.8,
-          5.8,
-          3.9,
-          5.1,
-          0.1,
-          6,
-        ];
         return (
           <LineChart
             yMin={0}
-            yMax={10}
-            data={chart}
+            yMax={this.state.maxVal}
+            data={this.state.chart}
             style={{flex: 2}}
             curve={shape.curveMonotoneX}
             svg={{
               stroke: 'white',
-              strokeWidth: 1.75,
+              strokeWidth: 2,
             }}
             contentInset={{left: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), right: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}}>
             <Line
@@ -51,7 +58,7 @@ export default class WelcomePage extends Component {
               y1="100%"
               y2="100%"
               stroke={'white'}
-              strokeDasharray={[2, 10]}
+              strokeDasharray={[5, 10]}
               strokeWidth={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5)}
             />
             <Line
@@ -61,7 +68,7 @@ export default class WelcomePage extends Component {
               y1="15%"
               y2="100%"
               stroke={'white'}
-              strokeDasharray={[2, 10]}
+              strokeDasharray={[5, 10]}
               strokeWidth={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5)}
             />
           </LineChart>
@@ -80,6 +87,9 @@ render(){
       <Text style={styles.logo}>supplant</Text>
       <View style={{marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), flex:0.5, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
       
+
+      
+      {this.state.xp < 25 && 
       <View style={{flex:0.35, flexDirection:'row',}}>
       <View style={{flex:0.2, alignItems:'center', justifyContent:'center'}}>
       <Image 
@@ -90,23 +100,64 @@ render(){
       <View style={{flex:0.8, paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), justifyContent:'center'}}>
       <View style={{flexDirection:'row', alignItems:'center'}}>
       <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/27), fontWeight:'bold'}}>Cactus </Text>
-      <Tooltip backgroundColor="white" overlayColor="rgba(0,0,0,0.15)" skipAndroidStatusBar={false} popover={<Text>Scanned Items</Text>}><TouchableHighlight style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/7), width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/3), paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), backgroundColor:'#4ba023',justifyContent:'center',}}><Text style={{color:'white', textAlign:"center", fontWeight:'bold', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/16),}}>10</Text></TouchableHighlight></Tooltip>
+      <Tooltip backgroundColor="white" overlayColor="rgba(0,0,0,0.15)" skipAndroidStatusBar={false} popover={<Text>Scanned Items</Text>}><TouchableHighlight style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/7), width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/3), paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), backgroundColor:'#4ba023',justifyContent:'center',}}><Text style={{color:'white', textAlign:"center", fontWeight:'bold', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/16),}}>{this.state.xp}</Text></TouchableHighlight></Tooltip>
       </View>
-      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}> Scan 5 more items to reach aloe</Text>
-      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)} progress={0.6} width={(Dimensions.get("window").width)*0.55} />
+      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}> Scan {25 - this.state.xp} more items for aloe vera</Text>
+      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)} progress={this.state.xp / 25} width={(Dimensions.get("window").width)*0.55} />
       </View>
-      </View>
-      <View style={{flex:0.65,}}>
+      </View>}
 
+      {this.state.xp >= 25 && this.state.xp < 75 &&
+      <View style={{flex:0.35, flexDirection:'row',}}>
+      <View style={{flex:0.2, alignItems:'center', justifyContent:'center'}}>
+      <Image 
+        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/80),}}
+        source={require('../assets/aloe.png')}
+      />
+      </View>
+      <View style={{flex:0.8, paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), justifyContent:'center'}}>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/27), fontWeight:'bold'}}>Aloe Vera </Text>
+      <Tooltip backgroundColor="white" overlayColor="rgba(0,0,0,0.15)" skipAndroidStatusBar={false} popover={<Text>Scanned Items</Text>}><TouchableHighlight style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/7), width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/3), paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), backgroundColor:'#4ba023',justifyContent:'center',}}><Text style={{color:'white', textAlign:"center", fontWeight:'bold', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/16),}}>{this.state.xp}</Text></TouchableHighlight></Tooltip>
+      </View>
+      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}> Scan {75 - this.state.xp} more items for seaweed</Text>
+      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)} progress={this.state.xp / 75} width={(Dimensions.get("window").width)*0.55} />
+      </View>
+      </View>}
+
+      {this.state.xp >= 75 && 
+      <View style={{flex:0.35, flexDirection:'row',}}>
+      <View style={{flex:0.2, alignItems:'center', justifyContent:'center'}}>
+      <Image 
+        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/80),}}
+        source={require('../assets/seaweed.png')}
+      />
+      </View>
+      <View style={{flex:0.8, paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), justifyContent:'center'}}>
+      <View style={{flexDirection:'row', alignItems:'center'}}>
+      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/27), fontWeight:'bold'}}>Seaweed </Text>
+      <Tooltip backgroundColor="white" overlayColor="rgba(0,0,0,0.15)" skipAndroidStatusBar={false} popover={<Text>Scanned Items</Text>}><TouchableHighlight style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/7), width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/3), paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), backgroundColor:'#4ba023',justifyContent:'center',}}><Text style={{color:'white', textAlign:"center", fontWeight:'bold', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/16),}}>{this.state.xp}</Text></TouchableHighlight></Tooltip>
+      </View>
+      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}> Scan {175 - this.state.xp} more items for master</Text>
+      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)} progress={this.state.xp / 175} width={(Dimensions.get("window").width)*0.55} />
+      </View>
+      </View>}
+      
+      
+      
+
+
+
+      <View style={{flex:0.65,}}>
       <View style={{flex:1, marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), backgroundColor:"#4ba023", borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>
       <View style={{flex:0.25, flexDirection:'row',}}>
-        <View style={{flex:0.5, alignItems:'flex-start'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), fontWeight:'bold', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}}>1.5 <Text style={{fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>kg/day</Text></Text></View>
-        <View style={{flex:0.5, alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), fontWeight:'bold', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}}>100 <Text style={{fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>kg</Text></Text></View>
+        <View style={{flex:0.5, alignItems:'flex-start'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), fontWeight:'bold', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}}>{this.state.avg} <Text style={{fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>kg/day</Text></Text></View>
+        <View style={{flex:0.5, alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), fontWeight:'bold', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}}>{this.state.total} <Text style={{fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>kg</Text></Text></View>
       </View>
       <View style={{flex:0.75}}>
         <View style={{flexDirection:'row', flex:0.9}}>
           <View style={{flex:0.1,}}>
-          <View style={{flex:0.5, justifyContent:'flex-start', alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>10</Text></View>
+          <View style={{flex:0.5, justifyContent:'flex-start', alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>{this.state.maxVal}</Text></View>
           <View style={{flex:0.5, justifyContent:'flex-end', alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5)}}>0</Text></View>
           </View>
           <View style={{flex:0.9,}}>
@@ -116,8 +167,8 @@ render(){
         <View style={{flex:0.2, flexDirection:'row',}}>
           <View style={{flex:0.1}}></View>
           <View style={{flex:0.9, flexDirection:'row'}}>
-          <View style={{flex:0.5, alignItems:'flex-start'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5),}}>Mon</Text></View>
-          <View style={{flex:0.5, alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>Fri</Text></View>
+          <View style={{flex:0.5, alignItems:'flex-start'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5),}}>{this.state.days[0]}</Text></View>
+          <View style={{flex:0.5, alignItems:'flex-end'}}><Text style={{color:'white', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), paddingRight:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>{this.state.days[1]}</Text></View>
           </View>
           </View>
       </View>
@@ -132,80 +183,39 @@ render(){
       
 
 
-      <View style={{flexDirection:'row', marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/120), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
+        {this.state.scannedItems.map((item) => 
+          <View key={item.id.toString()} style={{flexDirection:'row', marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/120), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
       <View style={{flex:0.25, justifyContent:'center', alignItems:'center'}}>
       <Image 
         style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
-        source={require('../assets/image.png')}/>
+        source={item.image}/>
       </View>
       <View style={{flex:0.75,}}>
-      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>8</Text>
-      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={0.8} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
-      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", "Cheese, Lettuce, Tomato, Bun, Cheddar, Bread, Beef")}><Text style={{color:'#494949', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/6), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>
+      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>{item.rating}</Text>
+      
+      {item.rating >= 7 &&
+            <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={item.rating/10} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
+          }
+      {item.rating <= 3 &&
+            <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#de563e'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={item.rating/10} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
+          }
+{item.rating > 3 && item.rating < 7 &&
+            <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#DAA520'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={item.rating/10} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
+          }
+
+      
+      
+      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", item.ingredients.toString())}><Text style={{color:'#494949', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/6), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>
       <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}>1 hour ago</Text>
-      <Image 
+      
+      {
+        item.rating > 6? <Image 
         style={{position:'absolute', width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), bottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), right:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),}}
-        source={require('../assets/lea.jpg')}/>
+        source={require('../assets/lea.jpg')}/>:null
+      }      
       </View>
-      </View>
-
-
-
-      <View style={{flexDirection:'row', marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/120), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
-      <View style={{flex:0.25, justifyContent:'center', alignItems:'center'}}>
-      <Image 
-        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
-        source={require('../assets/image2.png')}/>
-      </View>
-      <View style={{flex:0.75,}}>
-      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>5</Text>
-      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#DAA520'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={0.5} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
-      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", "Cheese, Lettuce, Tomato, Bun, Cheddar, Bread, Beef")}><Text style={{color:'#494949', paddingTop:6, fontSize:20, fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>
-      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}>3 hours ago</Text>
-      {/* <Image 
-        style={{position:'absolute', width:40, height:40, bottom:10, right:10,}}
-        source={require('../assets/lea.jpg')}/> */}
-      </View>
-      </View>
-
-
-
-      <View style={{flexDirection:'row', marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/120), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
-      <View style={{flex:0.25, justifyContent:'center', alignItems:'center'}}>
-      <Image 
-        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
-        source={require('../assets/image.png')}/>
-      </View>
-      <View style={{flex:0.75,}}>
-      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>9</Text>
-      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={0.9} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
-      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", "Cheese, Lettuce, Tomato, Bun, Cheddar, Bread, Beef")}><Text style={{color:'#494949', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/6), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>
-      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}>8 hours ago</Text>
-      <Image 
-        style={{position:'absolute', width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), bottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), right:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),}}
-        source={require('../assets/lea.jpg')}/>
-      </View>
-      </View>
-
-
-
-      <View style={{flexDirection:'row', marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/120), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
-      <View style={{flex:0.25, justifyContent:'center', alignItems:'center'}}>
-      <Image 
-        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
-        source={require('../assets/image2.png')}/>
-      </View>
-      <View style={{flex:0.75,}}>
-      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>2</Text>
-      <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#de563e'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={0.2} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
-      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", "Cheese, Lettuce, Tomato, Bun, Cheddar, Bread, Beef")}><Text style={{color:'#494949', paddingTop:6, fontSize:20, fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>
-      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}>2 days ago</Text>
-      {/* <Image 
-        style={{position:'absolute', width:40, height:40, bottom:10, right:10,}}
-        source={require('../assets/lea.jpg')}/> */}
-      </View>
-      </View>
-
+      </View>          
+          )}
 
         
         
