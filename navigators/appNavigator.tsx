@@ -4,8 +4,9 @@ import React from 'react';
 import {View} from 'react-native';
 import WelcomePage from '../screens/welcomePage';
 import Profile from '../screens/profile';
-import Camera from '../screens/camera';
+import CameraStack from './cameraStack';
 import { AntDesign } from '@expo/vector-icons'; 
+import Camera from '../screens/camera'
 
 const AppNavigator = createMaterialTopTabNavigator({
     WelcomePage: {screen: WelcomePage,
@@ -14,8 +15,9 @@ const AppNavigator = createMaterialTopTabNavigator({
                 <AntDesign name="home" size={27} color={tintColor} />)        
             }
     },
-    Camera: {screen: Camera,
+    Camera: {screen: CameraStack,
         navigationOptions: {
+            tabBarVisible:false,
             tabBarIcon: ({tintColor}) => (
                 <View style={{marginTop:-10,marginLeft:-8, height:50, width:50,}}><AntDesign name="pluscircle" size={50}  color={tintColor} /></View>)}
     },
@@ -26,7 +28,6 @@ const AppNavigator = createMaterialTopTabNavigator({
         }
     },
 }, {
-    
     initialRouteName: 'WelcomePage',
     tabBarPosition: 'bottom',
     tabBarOptions: {
@@ -63,5 +64,22 @@ const AppNavigator = createMaterialTopTabNavigator({
         },
     }
     });
+
+
+    CameraStack.navigationOptions = ({ navigation }) => {
+
+        let swipeEnabled = true;
+    
+        let routeName = navigation.state.routes[navigation.state.index].routeName
+        console.log(routeName)
+
+        if (routeName === 'LoadingImage') {
+            swipeEnabled = false
+        }
+
+        return {
+            swipeEnabled
+        }
+    }
 
 export default createAppContainer(AppNavigator);

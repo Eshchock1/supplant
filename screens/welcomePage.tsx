@@ -11,7 +11,7 @@ import * as Progress from 'react-native-progress';
 import { Tooltip} from 'react-native-elements';
 
 export default class WelcomePage extends Component {
-
+  
       renderChart() {
         const chart = [
           1.1,
