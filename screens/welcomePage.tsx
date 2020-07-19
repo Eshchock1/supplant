@@ -14,16 +14,17 @@ export default class WelcomePage extends Component {
   
     state= {
       xp:10,
-      chart:[ 2.2, 3, 5.5, 2.3, 3.2, 7, 6.2],
+      chart:[ 5, 3, 1.5, 2.3, 3.2, 5, 2],
       total: 105.2,
       scannedItems:[
-        {id:0,image:require('../assets/image.png'), rating:7, ingredients:['cheese', 'tomatoes', 'bread']},
-        {id:1,image:require('../assets/image2.png'), rating:5, ingredients:['beef', 'rice',]},
-        {id:2,image:require('../assets/image.png'), rating:9, ingredients:['lettuce', 'tomatoes', 'cucumber']},
-        {id:3,image:require('../assets/image2.png'), rating:2, ingredients:['cheese', 'beef', 'pepperoni']},
+        {id:0,image:require('../assets/pie.jpeg'), rating:7, ingredients:['blueberry', 'bread']},
+        {id:1,image:require('../assets/pizza.jpg'), rating:5, ingredients:['bread', 'cheese', 'tomatoes']},
+        {id:2,image:require('../assets/salad.jpg'), rating:9, ingredients:['lettuce', 'tomatoes', 'cucumber']},
+        {id:3,image:require('../assets/burger.jpg'), rating:2, ingredients:['cheese', 'beef', 'tomato', 'onion', 'lettuce']},
       ],
       days:[0,0], // I calc this
-      maxVal:10 // I calc this
+      maxVal:10, // I calc this
+      avg:10,
     }
 
     componentDidMount(){
@@ -187,7 +188,7 @@ render(){
           <View key={item.id.toString()} style={{flexDirection:'row', marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/120), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
       <View style={{flex:0.25, justifyContent:'center', alignItems:'center'}}>
       <Image 
-        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
+        style={{borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
         source={item.image}/>
       </View>
       <View style={{flex:0.75, paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}}>
