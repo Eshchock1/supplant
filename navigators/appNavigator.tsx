@@ -71,7 +71,6 @@ const AppNavigator = createMaterialTopTabNavigator({
         let swipeEnabled = true;
     
         let routeName = navigation.state.routes[navigation.state.index].routeName
-        console.log(routeName)
 
         if (routeName === 'LoadingImage') {
             swipeEnabled = false
