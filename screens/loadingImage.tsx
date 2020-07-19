@@ -66,11 +66,11 @@ headers:{
   'Content-Type':'multipart/form-data',
   'Authorization' : `Bearer ${idToken}`,
 }
-    }).then((bruh)=> {console.log(bruh)});
+    }).then((bruh)=> {console.log(bruh)}).catch((e)=>{console.log(e)});
       const a = await axios.get("https://us-central1-supplant-44e15.cloudfunctions.net/api/hello", { headers : {
         'Authorization' : `Bearer ${idToken}`,
       }});
-      console.log(a.data);
+      // console.log(a.data);
     }
     catch(error) {
       console.log({error}, Object.entries(error));
