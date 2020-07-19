@@ -16,8 +16,8 @@ return (
         style={styles.img}
         source={require('../assets/splashPlant.png')}
       />
-      <Button style={{backgroundColor:'#4ba023', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> navigation.navigate('LoginPage')}><Text style={{color:'white'}}>LOGIN</Text></Button>
-      <Button style={{backgroundColor:'#F8F8F8', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> navigation.navigate('CreateAccountPage')}><Text style={{color:'#494949'}}>SIGN UP</Text></Button>
+      <Button style={{backgroundColor:'#4ba023', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}} full onPress={()=> navigation.navigate('LoginPage')}><Text style={{color:'white'}}>LOGIN</Text></Button>
+      <Button style={{backgroundColor:'#F8F8F8', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}} full onPress={()=> navigation.navigate('CreateAccountPage')}><Text style={{color:'#494949'}}>SIGN UP</Text></Button>
     </View>
 )
 }
