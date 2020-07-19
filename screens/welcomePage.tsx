@@ -190,8 +190,8 @@ render(){
         style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/50), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/100),}}
         source={item.image}/>
       </View>
-      <View style={{flex:0.75,}}>
-      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>{item.rating}</Text>
+      <View style={{flex:0.75, paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}}>
+      <Text style={{color:'white', zIndex:20, position:'absolute', marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), marginLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>{item.rating}</Text>
       
       {item.rating >= 7 &&
             <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), zIndex:10, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30)} progress={item.rating/10} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
@@ -205,9 +205,7 @@ render(){
 
       
       
-      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", item.ingredients.toString())}><Text style={{color:'#494949', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/6), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>
-      <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}>1 hour ago</Text>
-      
+      <TouchableOpacity onPress={()=> Alert.alert("Ingredients:", item.ingredients.toString())}><Text style={{color:'#494949', paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/6), fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), fontWeight:'bold'}}>View Ingredients</Text></TouchableOpacity>      
       {
         item.rating > 6? <Image 
         style={{position:'absolute', width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/40), bottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), right:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),}}
