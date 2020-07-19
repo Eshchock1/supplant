@@ -55,7 +55,7 @@ render(){
   <View style={{flex:0.7, backgroundColor:'#FDFDFD'}}></View>
   </View>
   <View style={{flex:1, marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), position:'absolute', top:0, bottom:0, left:0, right:0,}}>
-  <Text style={styles.logo}>supplant</Text>
+  <Text style={styles.logo}>sup<Text>plant</Text></Text>
   <View style={{marginHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), flex:0.5, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20), backgroundColor:"white", shadowColor: "#000", shadowOffset: { width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,}}>
   
   <View style={{flex:0.35, flexDirection:'row',}}>
@@ -68,7 +68,7 @@ render(){
   <View style={{flex:0.8, paddingLeft:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), justifyContent:'center'}}>
   <View style={{flexDirection:'row', alignItems:'center'}}>
   <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/27), fontWeight:'bold'}}>Cactus </Text>
-  <Tooltip backgroundColor="white" overlayColor="rgba(0,0,0,0.15)" skipAndroidStatusBar={false} popover={<Text>Scanned Items</Text>}><TouchableHighlight style={{paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/3), paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), backgroundColor:'#4ba023',justifyContent:'center',}}><Text style={{color:'white', textAlign:"center", fontWeight:'bold', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),}}>10</Text></TouchableHighlight></Tooltip>
+  <Tooltip backgroundColor="white" overlayColor="rgba(0,0,0,0.15)" skipAndroidStatusBar={false} popover={<Text>Scanned Items</Text>}><TouchableHighlight style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/7), width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/35), paddingVertical:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/3), paddingHorizontal:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/5), borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30), backgroundColor:'#4ba023',justifyContent:'center',}}><Text style={{color:'white', textAlign:"center", fontWeight:'bold', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/16),}}>10</Text></TouchableHighlight></Tooltip>
   </View>
   <Text style={{color:'#494949', fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/13),}}> Scan 5 more items to reach aloe</Text>
   <Progress.Bar style={{marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)}} color={'#4ba023'} unfilledColor={'#D3D3D3'} borderWidth={0} height={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10)} progress={0.6} width={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200)} />
