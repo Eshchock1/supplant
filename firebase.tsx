@@ -1,14 +1,18 @@
 import * as firebase from "firebase";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDSQxtPPZA9QH8iExKXhMFPl-YQunI2rl0",
-    authDomain: "supplant-44e15.firebaseapp.com",
-    databaseURL: "https://supplant-44e15.firebaseio.com",
-    projectId: "supplant-44e15",
-    storageBucket: "supplant-44e15.appspot.com",
-  };
+  apiKey: "AIzaSyDHZapQ_z0uxq3WZfgWJT8__Xle0dT5Ny0",
+  authDomain: "supplant-org.firebaseapp.com",
+  projectId: "supplant-org",
+  storageBucket: "supplant-org.appspot.com",
+  messagingSenderId: "572775057762",
+  appId: "1:572775057762:android:bf090ae7e6b9859dae843b",
+  measurementId: "G-MWLPQTCZSQ"
+};
+
  
 // Initialize Firebase
 const Firebase = firebase.initializeApp(firebaseConfig);
 
 export default Firebase;
+export const FirebaseProvider = firebase;

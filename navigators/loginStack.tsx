@@ -9,18 +9,7 @@ const LoginStack = createMaterialTopTabNavigator({
         navigationOptions: {
             tabBarVisible:false,
         },
-    },
-    LoginPage: {screen: LoginPage,
-        navigationOptions: {
-            tabBarVisible:false,
-        },
-    },
-    CreateAccountPage: {screen: CreateAccountPage,
-        navigationOptions: {
-            tabBarVisible:false,
-        },
-    },
-    
+    },    
 }, {
     initialRouteName: 'SplashPage',
    });

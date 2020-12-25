@@ -12,17 +12,14 @@ import {
 } from "react-native";
 import firebase from "../firebase";
 import { Form, Item, Label, Input, Button } from "native-base";
-import {
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
 
-const LoginPage = ({ navigation}) => {
+
+const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrortext] = useState("");
 
-  loginUser = (email, password) => {
+  const loginUserEmailPassword = (email: string, password: string) => {
     var emailTrimmed = email.trim();
     firebase
       .auth()
@@ -51,55 +48,86 @@ const LoginPage = ({ navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView // adjust the value here if you need more padding
-        behavior="position"
+        behavior='position'
         keyboardVerticalOffset={Platform.select({
-          ios: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/200),
-          android: () => -(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/250),
+          ios: () =>
+            -(
+              Dimensions.get("window").width + Dimensions.get("window").height
+            ) /
+            (1080 / 200),
+          android: () =>
+            -(
+              Dimensions.get("window").width + Dimensions.get("window").height
+            ) /
+            (1080 / 250),
         })()}
-        style={styles.container}
-      >
-          <Text style={styles.logo}><Text style={{ color: "#6E6D74" }}>sup</Text>plant</Text>
+        style={styles.container}>
+        <Text style={styles.logo}>
+          <Text style={{ color: "#6E6D74" }}>sup</Text>plant
+        </Text>
 
-            <Text style={styles.subtitle}>Track Your Carbon Footprint</Text>
+        <Text style={styles.subtitle}>Track Your Carbon Footprint</Text>
         <Text style={styles.title}>Login</Text>
         <Form style={styles.signIn}>
-          <Item floatingLabel style={{ borderColor: "#207A18", paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), }}>
+          <Item
+            floatingLabel
+            style={{
+              borderColor: "#207A18",
+              paddingBottom:
+                (Dimensions.get("window").width +
+                  Dimensions.get("window").height) /
+                (1080 / 10),
+            }}>
             <Label>Email</Label>
             <Input
               autoCorrect={false}
-              autoCapitalize="none"
+              autoCapitalize='none'
               onChangeText={(email) => setEmail(email)}
             />
           </Item>
-          <Item floatingLabel style={{ borderColor: "#207A18", paddingBottom:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10), }}>
+          <Item
+            floatingLabel
+            style={{
+              borderColor: "#207A18",
+              paddingBottom:
+                (Dimensions.get("window").width +
+                  Dimensions.get("window").height) /
+                (1080 / 10),
+            }}>
             <Label>Password</Label>
             <Input
               autoCorrect={false}
-              autoCapitalize="none"
+              autoCapitalize='none'
               secureTextEntry={true}
               onChangeText={(password) => setPassword(password)}
             />
           </Item>
         </Form>
         <Text style={styles.errorText}>{errorText}</Text>
-          
-        <Button style={{shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5,backgroundColor:'#207A18', marginTop:0, borderRadius:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/12),}} full onPress={()=> loginUser(email, password)}><Text style={{color:'white'}}>LOGIN</Text></Button>
 
         <View
           style={{
             flexDirection: "row",
             justifyContent: "center",
-            alignItems: "flex-end",
+            width: "100%",
           }}>
-          <Text style={styles.bottomText}>Don't have an account yet?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("CreateAccountPage")}>
-            <Text style={{ color: "#207A18" }}>Sign Up.</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{flexDirection: "row", justifyContent: "center", width:"100%",}}>
-        <Image 
-        style={{width:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/360), height:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/360), marginTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15)}}
-        source={require('../assets/mainPlant.png')}/>
+          <Image
+            style={{
+              width:
+                (Dimensions.get("window").width +
+                  Dimensions.get("window").height) /
+                (1080 / 360),
+              height:
+                (Dimensions.get("window").width +
+                  Dimensions.get("window").height) /
+                (1080 / 360),
+              marginTop:
+                (Dimensions.get("window").width +
+                  Dimensions.get("window").height) /
+                (1080 / 15),
+            }}
+            source={require("../assets/mainPlant.png")}
+          />
         </View>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
@@ -110,40 +138,64 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingHorizontal: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30),
-    paddingVertical: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
+    paddingHorizontal:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 30),
+    paddingVertical:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 15),
     // alignItems: 'center',
     // justifyContent: 'center',
   },
   errorText: {
     color: "#ff6347",
-    fontSize: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
+    fontSize:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 15),
     textAlign: "center",
-    paddingBottom: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),
+    paddingBottom:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 10),
   },
   logo: {
     color: "#4ba023",
-    fontSize: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/38),
+    fontSize:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 38),
     fontWeight: "bold",
-    paddingTop: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/20),
+    paddingTop:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 20),
     // fontFamily:"roboto",
   },
-  subtitle:{
-    paddingTop:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),
-    color:'#494949',
-    fontSize:(Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
+  subtitle: {
+    paddingTop:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 10),
+    color: "#494949",
+    fontSize:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 15),
   },
   title: {
     color: "#30851b",
-    fontSize: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30),
+    fontSize:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 30),
     // fontWeight: "bold",
-    paddingTop: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/10),
+    paddingTop:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 10),
   },
   signIn: {
-    paddingBottom: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/15),
+    paddingBottom:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 15),
   },
   bottomText: {
-    paddingTop: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080/30),
+    paddingTop:
+      (Dimensions.get("window").width + Dimensions.get("window").height) /
+      (1080 / 30),
     textAlign: "center",
   },
 });

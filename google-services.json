@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "572775057762",
+    "project_id": "supplant-org",
+    "storage_bucket": "supplant-org.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572775057762:android:bf090ae7e6b9859dae843b",
+        "android_client_info": {
+          "package_name": "app.supplant.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572775057762-e2cp5bimvi060668v8mmo6jdfj9qiebf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.supplant.client",
+            "certificate_hash": "1fc949c8dd45b49632507f3ed01463636b96f2a9"
+          }
+        },
+        {
+          "client_id": "572775057762-usmjlh1esackfr4f8n7rn2qhopr531qh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiYO8BDrck2nFVbtWzvk-F3ZeU-u8AiIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "572775057762-usmjlh1esackfr4f8n7rn2qhopr531qh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
