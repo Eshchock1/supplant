@@ -1,13 +1,36 @@
-import { TransitionPresets } from 'react-navigation-stack';
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
-import LoginStack from './loginStack';
-import AppNavigator from './appNavigator';
-import LoadingPage from '../screens/loadingPage';
+import React from 'react';
+import { createStackNavigator as createSnackNavigator } from "@react-navigation/stack";
+import LoginStack from "./loginStack";
+import AppNavigator from "./appNavigator";
+import { NavigationContainer } from '@react-navigation/native';
+import {connect, MapStateToProps} from 'react-redux'; 
+import {types} from '../store';
 
-const AppStack = createSwitchNavigator({
-LoadingPage: {screen: LoadingPage},
-LoginStack:LoginStack,
-        AppNavigator:AppNavigator,
-},);
+interface StateProps {
+  signedIn: boolean;
+}
+const Snack = createSnackNavigator();
 
-export default createAppContainer(AppStack);
+const App = (props: StateProps) => {
+  const { signedIn } = props;
+  return (
+    <NavigationContainer>
+      <Snack.Navigator headerMode='none'>
+        {signedIn ? (
+          <>
+            <Snack.Screen component={AppNavigator} name='Main' />
+            {/* <Snack.Screen component={Settings} name='Settings' /> */}
+          </>
+        ) : (
+          <Snack.Screen component={LoginStack} name='Login' />
+        )}
+      </Snack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const mapStateToProps : MapStateToProps<StateProps, {}, types.RootState>= (state: types.RootState) => ({
+  signedIn : state.user.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(App)

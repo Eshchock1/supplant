@@ -4,14 +4,6 @@ import LoginPage from '../screens/loginPage';
 import SplashPage from '../screens/splashPage';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 
-const LoginStack = createMaterialTopTabNavigator({
-    SplashPage: {screen: SplashPage,
-        navigationOptions: {
-            tabBarVisible:false,
-        },
-    },    
-}, {
-    initialRouteName: 'SplashPage',
-   });
+const LoginStack = SplashPage;
 
-export default createAppContainer(LoginStack);
+export default LoginStack;

@@ -18,7 +18,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import { SignInGoogle } from "../utils/SignInGoogle";
+import { SignInGoogle } from "../utils/Auth";
 
 const CreateAccountPage = ({ navigation }) => {
   const [name, setName] = useState("");

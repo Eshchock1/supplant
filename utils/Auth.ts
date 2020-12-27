@@ -34,3 +34,7 @@ export const SignInGoogle = async () => {
     console.log({ error });
   }
 };
+export const logoutUserFn = () => 
+{
+  return firebase.auth().signOut();
+} 

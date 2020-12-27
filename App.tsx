@@ -1,25 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect, Component  } from 'react';
-import { StyleSheet, Text, View ,YellowBox} from 'react-native';
-import AppStack from './navigators/appStack';
+import { StatusBar } from "expo-status-bar";
+import React from 'react';
+import { StyleSheet, SafeAreaView, View, YellowBox, } from "react-native";
+import AppStack from "./navigators/appStack";
+
+import { Provider } from "react-redux";
+import { store } from "./store";
+
 YellowBox.ignoreWarnings([
   "Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false`",
 ]);
 
-export default class App extends Component {
-  
-render(){
-  return (
-    <View style={styles.container}>
-    <AppStack />
-      <StatusBar style="auto"/>
-    </View>
-  );}
-}
+const App = () => (
+  <>
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <AppStack />
+          <StatusBar style='auto' />
+        </View>
+      </SafeAreaView>
+    </Provider>
+  </>
+);
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });

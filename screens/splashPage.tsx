@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, FC } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,10 +17,10 @@ import {
   TouchableOpacity,
 } from "react-native-gesture-handler";
 
-import { SignInGoogle } from "../utils/SignInGoogle";
+import { SignInGoogle } from "../utils/Auth";
 import { SocialIcon } from "react-native-elements";
 
-const LoadingPage = ({ navigation }) => {
+const LoadingPage : FC = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>

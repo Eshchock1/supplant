@@ -12,11 +12,15 @@ import * as Font from "expo-font";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
 interface CameraProps {
   navigation: any;
 }
 
-export default function CameraPage({ navigation }) {
+export default function CameraPage() {
+  const navigation = useNavigation();
+
   const [hasPermission, setHasPermission] = useState(false);
   let [camera, setCamera] = useState(Camera.Constants.Type);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -61,10 +65,6 @@ export default function CameraPage({ navigation }) {
       </Camera>
       <View
         style={{
-          height:
-            (Dimensions.get("window").height -
-              (Dimensions.get("window").width * 4) / 3) /
-            (3 / 2),
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
@@ -142,7 +142,7 @@ export default function CameraPage({ navigation }) {
             alignItems: "center",
             justifyContent: "center",
           }}
-          onPress={() => navigation.navigate("WelcomePage")}>
+          onPress={() => navigation.navigate("Welcome")}>
           <Text
             style={{
               fontSize:
