@@ -7,22 +7,37 @@ import {
   AsyncStorage,
 } from "react-native";
 // import AsyncStorage from "@react-native-community/async-storage";
-import { Camera } from "expo-camera";
+import { Camera, CameraCapturedPicture } from "expo-camera";
 import * as Font from "expo-font";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationTabProp } from "react-navigation-tabs";
+import {types, actions} from '../store';
+import {connect} from 'react-redux'; 
+
+const {SetImageAction} = actions.camera;
 
 interface CameraProps {
-  navigation: any;
+  navigation: NavigationTabProp;
 }
 
-export default function CameraPage() {
-  const navigation = useNavigation();
+interface DispatchProps
+{
+  SetImageAction : (image : string | null) =>  any
+}
+interface StateProps 
+{
+
+}
+
+type Props = CameraProps & StateProps & DispatchProps;
+
+const CameraPage = ({navigation, SetImageAction} : Props) => {
 
   const [hasPermission, setHasPermission] = useState(false);
-  let [camera, setCamera] = useState(Camera.Constants.Type);
+  let [camera, setCamera] = useState<Camera | null>(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
@@ -126,14 +141,16 @@ export default function CameraPage() {
           onPress={async () => {
             if (camera) {
               console.log("pressed");
-              let photo = await camera.takePictureAsync({
+              let photo = "data:image/jpg;base64," + (await camera.takePictureAsync({
                 skipProcessing: true,
-              });
-              console.log(photo);
+                base64 : true,
+              })).base64;
+              console.log(photo.substring(0,30));
+              SetImageAction(photo);
               storeImageLocally("pic", photo);
               navigation.navigate("ImageConfirmation");
             } else {
-              console.log("pressed");
+              console.log("NO CAMERA");
             }
           }}></TouchableOpacity>
         <TouchableOpacity
@@ -167,8 +184,17 @@ export default function CameraPage() {
   );
 }
 
-const storeImageLocally = async (key: string, result: any) => {
+const mapStateToProps = (state: types.RootState) => ({
+  camera: state.camera.image,
+  user : state.user.user,
+});
+
+export default connect(mapStateToProps, { SetImageAction })(CameraPage);
+
+
+
+const storeImageLocally = async (key: string, result: string) => {
   try {
-    await AsyncStorage.setItem(key, result.uri);
+    await AsyncStorage.setItem(key, result);
   } catch (e) {}
 };

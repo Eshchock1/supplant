@@ -1,4 +1,6 @@
 import {combineReducers, ReducerFromReducersMapObject} from 'redux';
-import { userReducer as user } from './user/reducers'
+import user from './user/reducers'
+import camera from './camera/reducers'
 
-export const rootReducer = combineReducers({user});
+
+export const rootReducer = combineReducers({user, camera});

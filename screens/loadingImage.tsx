@@ -22,117 +22,61 @@ import { SkypeIndicator } from "react-native-indicators";
 import * as FileSystem from "expo-file-system";
 import axios from "axios";
 import FormData from "form-data";
+import { NavigationTabProp } from "react-navigation-tabs";
 
-export default class LoadingPage extends React.Component {
+import {types, actions} from '../store';
+import {connect} from 'react-redux'; 
+
+interface OwnProps {
+  navigation: NavigationTabProp;
+}
+
+interface StateProps {
+  image : string | null;
+}
+type Props = OwnProps & StateProps;
+
+class LoadingPage extends React.Component<Props, {}> {
+  public static defaultProps = {
+    image : null
+  };
   handleBackButton = () => {
     return true;
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
-    setTimeout(() => {
-      this.props.navigation.navigate("Camera");
-      this.props.navigation.navigate("WelcomePage");
-    }, 2000);
-    this.getImageFromStorage("pic");
-    this.bruh();
+    const imageResult = await this.PostImage();
+    console.log({imageResult})
+    this.props.navigation.navigate("Camera");
+    this.props.navigation.navigate("Welcome");
   }
 
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress", this.handleBackButton);
   }
 
-  state = {
-    image: FileSystem.documentDirectory,
+  state : {image : string | null } = {
+    image: null,
   };
 
-  async getImageFromStorage(imageKey: string) {
-    let value = await AsyncStorage.getItem(imageKey);
-    this.setState({ image: value });
+
+  async PostImage() {
+    try {
+      const image = this.props.image;
+      console.log(image?.substring(0, 20));
+      const imageResponse = await firebase
+        .functions()
+        .httpsCallable("functionPostImage")({ name: "", image: image });
+
+      const imageURL = imageResponse.data.imageURL as string;
+      const fileName = imageResponse.data.fileName as string;
+      return { imageURL, fileName };
+    } catch (error) {
+      console.log({ error });
+      return error;
+    }
   }
-
-  formData = () => {
-    const form = new FormData();
-    form.append("image", {
-      uri: this.state.image,
-      type: "image/jpg",
-      name: "pic.jpg",
-    });
-    axios
-      .post(
-        "https://us-central1-supplant-44e15.cloudfunctions.net/api/foodUpload",
-        form,
-        {
-          headers: {
-            "content-type": "multipart/formdata",
-          },
-        }
-      )
-      .then((bruh) => {
-        console.log(bruh);
-      });
-  };
-
-  bruh = () => {
-    firebase
-      .auth()
-      .currentUser?.getIdToken()
-      .then(async (idToken) => {
-        try {
-          const form = new FormData();
-          form.append("image", {
-            uri: this.state.image,
-            type: "image/jpg",
-            name: "pic.jpg",
-          });
-          axios
-            .post(
-              "https://us-central1-supplant-44e15.cloudfunctions.net/api/foodUpload",
-              form,
-              {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                  Authorization: `Bearer ${idToken}`,
-                },
-              }
-            )
-            .then((response) => {
-              console.log(response);
-            })
-            .catch((e) => {
-              console.log(e);
-            });
-          const a = await axios.get(
-            "https://us-central1-supplant-44e15.cloudfunctions.net/api/hello",
-            {
-              headers: {
-                Authorization: `Bearer ${idToken}`,
-              },
-            }
-          );
-          // console.log(a.data);
-        } catch (error) {
-          console.log({ error }, Object.entries(error));
-        }
-
-        console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-      });
-  };
-
-  // const bruh = (dispatch) => {
-  //   axios.post('https://us-central1-supplant-44e15.cloudfunctions.net/api/foodUpload', data, {
-  //     headers: {
-  //       'accept': 'application/json',
-  //       'Accept-Language': 'en-US,en;q=0.8',
-  //       'Content-Type': multipart/form-data; boundary=${data._boundary},
-  //     }
-  //   })
-  //     .then((response) => {
-  //       //handle success
-  //     }).catch((error) => {
-  //       //handle error
-  //     });
-  //   };}
 
   render() {
     return (
@@ -148,6 +92,12 @@ export default class LoadingPage extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state: types.RootState) => ({
+  image: state.camera.image,
+});
+
+export default connect(mapStateToProps)(LoadingPage);
 
 const styles = StyleSheet.create({
   container: {

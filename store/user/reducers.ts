@@ -21,7 +21,7 @@ const initialState: UserState = {
   logoutError : null,
   user: null,
 } as const;
-export function userReducer (
+export default function userReducer (
   state : UserState = initialState,
   action: UserActionTypes
 ): UserState {
