@@ -10,8 +10,8 @@ import * as shape from 'd3-shape';
 import * as Progress from 'react-native-progress';
 import { Tooltip} from 'react-native-elements';
 
-export default class WelcomePage extends Component {
-  
+
+export default class HomePage extends Component {
     state= {
       xp:10,
       chart:[ 5, 3, 1.5, 2.3, 3.2, 5, 2],

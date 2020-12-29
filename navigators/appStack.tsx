@@ -1,36 +1,35 @@
-import React from 'react';
-import { createStackNavigator as createSnackNavigator } from "@react-navigation/stack";
-import LoginStack from "./loginStack";
-import AppNavigator from "./appNavigator";
-import { NavigationContainer } from '@react-navigation/native';
-import {connect, MapStateToProps} from 'react-redux'; 
-import {types} from '../store';
+import React from "react";
+import { createStackNavigator as createSnackNavigator, StackNavigationProp } from "@react-navigation/stack";
+import LoginStack, {StackParamList as LoginParams} from "./loginStack";
+import AppNavigator, {MainTabParamList} from "./MainTabNavigator";
+import { NavigationContainer, NavigatorScreenParams } from "@react-navigation/native";
+import { RouteProp } from '@react-navigation/native';
 
-interface StateProps {
-  signedIn: boolean;
-}
-const Snack = createSnackNavigator();
+// `NavigatorScreenParams` if you want to pass in arguments for the nested screen, `undefined` so that 
+// if you just want to go to default screen, you can do `navigator.navigate('SCREEN_NAME')` with just 1 argument.
+// Otherwise will require you to specify nested screen name every time you navigate.
 
-const App = (props: StateProps) => {
-  const { signedIn } = props;
-  return (
-    <NavigationContainer>
-      <Snack.Navigator headerMode='none'>
-        {signedIn ? (
-          <>
-            <Snack.Screen component={AppNavigator} name='Main' />
-            {/* <Snack.Screen component={Settings} name='Settings' /> */}
-          </>
-        ) : (
-          <Snack.Screen component={LoginStack} name='Login' />
-        )}
-      </Snack.Navigator>
-    </NavigationContainer>
-  );
+export type RootStackParamList = {
+  LoginStack: NavigatorScreenParams<LoginParams> | undefined;
+  MainTabNavigator: NavigatorScreenParams<MainTabParamList> | undefined;
 };
 
-const mapStateToProps : MapStateToProps<StateProps, {}, types.RootState>= (state: types.RootState) => ({
-  signedIn : state.user.isAuthenticated,
-});
 
-export default connect(mapStateToProps)(App)
+// Root Route and Navigation Props to allow for nested type checking with simpler imports -  
+// only type argument needed is for the route name, instead of needing to pass `RootStackParamList` every time.
+
+export type RootRouteProp<RouteName extends keyof RootStackParamList> = RouteProp<RootStackParamList, RouteName>
+export type RootNavProp<T extends keyof RootStackParamList> = StackNavigationProp<RootStackParamList, T>;
+
+const Snack = createSnackNavigator<RootStackParamList>();
+
+const App = () => (
+  <NavigationContainer>
+    <Snack.Navigator headerMode='none' initialRouteName="LoginStack">
+      <Snack.Screen component={AppNavigator} name='MainTabNavigator' />
+      <Snack.Screen component={LoginStack} name='LoginStack' />
+    </Snack.Navigator>
+  </NavigationContainer>
+);
+
+export default App;

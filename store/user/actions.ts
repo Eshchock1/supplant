@@ -24,15 +24,15 @@ type UserAction_t = ThunkAction<
 
 export const receiveLogin = (user: firebase.User) => {
 
-  const {displayName, email, emailVerified, isAnonymous, photoURL, providerId, phoneNumber, providerData, refreshToken, uid, tenantId} = user;
-  const serializedUser = {displayName, email, emailVerified, isAnonymous, photoURL, providerId, phoneNumber, providerData, refreshToken, uid, tenantId};
+  const {displayName, email, emailVerified, isAnonymous, photoURL, providerId, phoneNumber, refreshToken, uid, tenantId,} = user;
+  const serializedUser = {displayName, email, emailVerified, isAnonymous, photoURL, providerId, phoneNumber, refreshToken, uid, tenantId};
   return {
     type: LOGIN_SUCCESS as typeof LOGIN_SUCCESS,
     user : serializedUser,
   };
 };
 
-export const LoginGoogleAction: UserAction_t = async (dispatch) => {
+export const LoginGoogleAction: () => UserAction_t = () => async (dispatch) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
     const UserCreds = await SignInGoogle();
@@ -44,7 +44,7 @@ export const LoginGoogleAction: UserAction_t = async (dispatch) => {
       type: LOGIN_FAILURE,
       message:
         (error && error.message) ||
-        "Error: Unknown Error Occurred During Logout",
+        "Error: Unknown Error Occurred During Login",
     });
   }
 };
@@ -55,7 +55,7 @@ export const LoginGoogleAction: UserAction_t = async (dispatch) => {
 // E -> extra arguments type - If you want to pass in additional arguments to the action?
 // A -> Action Types - the valid action types that `dispatch` is allowed to accept.
 
-export const LogoutUserAction: UserAction_t = async (dispatch) => {
+export const LogoutUserAction: () => UserAction_t = () => async (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });
   try {
     await logoutUser();
