@@ -25,7 +25,7 @@ export default function userReducer (
   state : UserState = initialState,
   action: UserActionTypes
 ): UserState {
-  console.log("USER REDUCER ", {state, action});
+  // console.log("USER REDUCER ", {state, action});
 
   switch (action.type) {
     case LOGIN_REQUEST:

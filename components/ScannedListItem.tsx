@@ -5,7 +5,7 @@ import * as Progress from "react-native-progress";
 const unit = (Dimensions.get("window").width + Dimensions.get("window").height) / 1080;
 
 interface ScannedItem {
-	id: number;
+	id: number | string;
 	rating: number;
 	image: any;
 	ingredients: string[];

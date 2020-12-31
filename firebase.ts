@@ -10,4 +10,4 @@ import {firebaseConfig} from './envars'
 const Firebase = firebase.initializeApp(firebaseConfig);
 
 export default Firebase;
-export const FirebaseProvider = firebase;
+export {firebase as FirebaseProvider};
