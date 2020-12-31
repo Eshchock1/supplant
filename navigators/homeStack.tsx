@@ -7,12 +7,13 @@ import { types, actions } from "../store";
 import { connect, MapStateToProps } from "react-redux";
 import { NavigationTabProp } from "react-navigation-tabs";
 
-import HomeScreen from "../screens/home";
+import HomeScreen from "../screens/HomePage";
 import { CompositeNavigationProp } from "@react-navigation/native";
 import { MainTabNavProp } from "./MainTabNavigator";
 
 export type StackParamList = {
   Home: undefined;
+  
 };
 export type HomeNavProp<T extends keyof StackParamList> = CompositeNavigationProp<
   StackNavigationProp<StackParamList, T>,

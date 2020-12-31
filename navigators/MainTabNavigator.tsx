@@ -37,13 +37,13 @@ const CameraIcon = ({ color }: { color: string }) => (
     <AntDesign name='pluscircle' size={50} color={color} />
   </View>
 );
-
 const ProfileIcon = ({ color }: { color: string }) => <AntDesign name='user' size={27} color={color} />;
+
 const TabBar = (props: MaterialTopTabBarProps) => {
   if (props.state.index === 1) {
     return <></>;
   }
-  return <MaterialTopTabBar {...props}></MaterialTopTabBar>;
+  return <MaterialTopTabBar {...props} ></MaterialTopTabBar>;
 };
 let TabNavigatorOptions: Partial<React.ComponentProps<typeof Tab.Navigator>>;
 
@@ -89,16 +89,14 @@ TabNavigatorOptions = {
     showIcon: true,
     showLabel: false,
     iconStyle: {
-      width: 35,
+      width: 30,
       height: 30,
     },
 
     style: {
       backfaceVisibility: "hidden",
       backgroundColor: "white",
-      height: "9.5%",
       justifyContent: "center",
-      position: "absolute",
       shadowColor: "#000",
       shadowOffset: {
         width: 0,

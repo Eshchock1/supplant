@@ -56,7 +56,7 @@ const LoadingPage = ({ navigation, image }: Props) => {
 					width: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080 / 200),
 					paddingTop: (Dimensions.get("window").width + Dimensions.get("window").height) / (1080 / 40),
 				}}>
-				<TouchableOpacity onPress={() => navigation.goBack()}>
+				<TouchableOpacity onPress={() => navigation.pop()}>
 					<AntDesign name='close' size={(Dimensions.get("window").width + Dimensions.get("window").height) / (1080 / 60)} color='#494949' />
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => navigation.push("LoadingImage")}>

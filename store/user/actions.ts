@@ -71,11 +71,15 @@ export const LogoutUserAction: () => UserAction_t = () => async (dispatch) => {
 };
 
 export const verifyAuth: UserAction_t = async (dispatch) => {
+  // console.log("Verify Auth Request")
   Firebase.auth().onAuthStateChanged((user) => {
+    // console.log("Verify Auth On State Change", {user })
     if (user) {
+      // console.log("Verify Auth Receive Login")
       dispatch(receiveLogin(user));
     }
     dispatch({ type: VERIFY_SUCCESS });
   });
+  
   return dispatch({ type: VERIFY_REQUEST });
 };
