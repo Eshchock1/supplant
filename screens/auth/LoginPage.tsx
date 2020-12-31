@@ -26,6 +26,7 @@ type Props = ComponentProps & StateProps & DispatchProps;
 
 const LoadingPage = ({ LoginGoogle, isLoggingIn, isVerifying, navigation, errorText }: Props) => {
   useEffect(() => {
+    console.log("USE EFFECT IS LOGGING IN ", {isLoggingIn, isVerifying});
     if (isVerifying || isLoggingIn) {
       navigation.replace("AuthLoading");
     }
@@ -44,10 +45,8 @@ const LoadingPage = ({ LoginGoogle, isLoggingIn, isVerifying, navigation, errorT
         type={"google"}
         light
         raised
+        disabled={isVerifying || isLoggingIn}
         onPress={LoginGoogle}
-        // Right now there is an error where it will says
-        // 'Cannot start new task while another task is currently in progress'
-        // If the login button is pressed two times in a row. Disable the button after the first press.
         style={{
           width: 208,
           height: 48,
